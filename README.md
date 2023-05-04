@@ -2,7 +2,7 @@
 
 <div align="center">
 
-  <h3><b>BookStore</b></h3>
+  <h3><b>Bookstore</b></h3>
 
 </div>
 
@@ -11,7 +11,7 @@
 # 📗 Table of Contents
 
 - [📗 Table of Contents](#-table-of-contents)
-- [📖 Todo-App ](#-todo-app-)
+- [📖 Bookstore ](#-bookstore-)
   - [:hammer\_and\_wrench: Built With ](#hammer_and_wrench-built-with-)
     - [Tech Stack ](#tech-stack-)
   - [Key Features ](#key-features-)
@@ -31,11 +31,11 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 Todo-App <a name="about-project"></a>
+# 📖 Bookstore <a name="about-project"></a>
 
 This project is built with React
 
-**Math-Magicians** is a simple todo app that allows one to:
+**Bookstore** is a simple web app that allows one to:
   - Display a list of books.
   - Add a book.
   - Remove a selected book.
