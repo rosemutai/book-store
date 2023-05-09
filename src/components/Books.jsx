@@ -5,7 +5,7 @@ import { removeBook } from "../redux/books/booksSlice";
 
 const Books = () => {
 
-  const { books } = useSelector((state) => state.books)
+  const books = useSelector((state) => state.books.books)
   let dispatch = useDispatch();
 
     const deleteBook = (e) => {
@@ -15,11 +15,14 @@ const Books = () => {
   return (
     <div className="">
       <div className="books-list">
-        {Array.from(books).map((book) => {
+        {books.map((book) => {
           return (
             <Book
               key={book.item_id}
-              {...book}
+              item_id={book.item_id}
+              category={book.category}
+              title={book.title}
+              author={book.author}
               onClick={deleteBook}
             />
           );
