@@ -10,7 +10,12 @@ const Book = ({ item_id, category, title, author, onClick }) => {
       <h2>{title}</h2>
       <p>{author}</p>
 
-      <Button text="Remove" id={item_id}  onClick={onClick} />
+      <Button
+        text="Remove"
+        id={item_id}
+        onClick={onClick}
+        classname="bg-black text-white px-3"
+      />
     </div>
   );
 };

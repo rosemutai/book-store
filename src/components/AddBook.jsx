@@ -40,7 +40,7 @@ const AddBook = () => {
           className="border border-slate-200"
         />
 
-        <Button text="ADD BOOK" onClick={submitForm}  />
+        <Button text="ADD BOOK" onClick={submitForm} classname="bg-turquoise text-white px-3" />
       </form>
     </div>
   );
