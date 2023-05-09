@@ -16,10 +16,7 @@ const Book = ({ item_id, category, title, author, onClick }) => {
 };
 
 Book.propTypes = {
-  item_id: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  item_id: PropTypes.string,
   category: PropTypes.string,
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
