@@ -1,26 +1,31 @@
 import { PropTypes } from "prop-types";
+import Button from "./Button";
 
-const Book = ({ category, title, author, comments }) => {
+
+const Book = ({ item_id, category, title, author, onClick }) => {
+
   return (
     <div className="book">
       <h4>{category}</h4>
       <h2>{title}</h2>
       <p>{author}</p>
-      <ul>
-        {comments.map((comment) => {
-          <li key={comment}>{comment}</li>
-        })}
-      </ul>
-      <button type="button" className="bg-black text-white">Delete</button>
+
+      <Button
+        text="Remove"
+        id={item_id}
+        onClick={onClick}
+        classname="bg-black text-white px-3"
+      />
     </div>
   );
 };
 
 Book.propTypes = {
-  category: PropTypes.string.isRequired,
+  item_id: PropTypes.string,
+  category: PropTypes.string,
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   comments: PropTypes.array,
-
+  onClick: PropTypes.func,
 };
 export default Book

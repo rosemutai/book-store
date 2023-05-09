@@ -1,43 +1,30 @@
+import { useDispatch, useSelector } from "react-redux";
 import AddBook from "./AddBook";
 import Book from "./Book"
-
-const arrBooks = [
-  {
-    category: "Fiction",
-    title: "The Red Lights",
-    author: "Rose Roberts",
-    comments: ["Great Book", "Love it!"],
-  },
-
-  {
-    category: "Science Fiction",
-    title: "Dune",
-    author: "Frank Herbert",
-    comments: ["Great Book", "Love it!"],
-  },
-
-  {
-    category: "Econmy",
-    title: "Capital in the Twenty-First Century",
-    author: "Suzanne Collins",
-    comments: ["Great Book", "Love it!"],
-  },
-];
+import { removeBook } from "../redux/books/booksSlice";
 
 const Books = () => {
+
+  const books = useSelector((state) => state.books.books)
+  let dispatch = useDispatch();
+
+    const deleteBook = (e) => {
+      dispatch(removeBook(e.target.id));
+    };
+
   return (
     <div className="">
       <div className="books-list">
-        {arrBooks.map((book) => {
+        {books.map((book) => {
           return (
-            <div key={book.title}>
-              <Book
-                category={book.category}
-                title={book.title}
-                author={book.author}
-                comments={book.comments}
-              />
-            </div>
+            <Book
+              key={book.item_id}
+              item_id={book.item_id}
+              category={book.category}
+              title={book.title}
+              author={book.author}
+              onClick={deleteBook}
+            />
           );
         })}
       </div>

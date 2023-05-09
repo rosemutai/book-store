@@ -1,26 +1,23 @@
-import { useState } from "react"
+import { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { addBook } from "../redux/books/booksSlice";
+import Button from './Button';
 
 const AddBook = () => {
 
-  const [state, setState] = useState({
-    title: "",
-    bookCategory: "",
+  const dispatch = useDispatch();
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const books = useSelector((state) => state.books.books)
 
-  });
+  const submitForm = (e) => {
+    e.preventDefault();
 
-  const handleChange = (e) => {
-    setState((state) => ({
-      ...state,
-      [e.target.name]: e.target.value,
-    }));
+    const id = books.length + 1
+
+    dispatch(addBook({ item_id: `item${id}`, title, author }));
   }
 
-  const categories = ["Science Fiction", "Economy"]
-  const categoryOptions = categories.map((category) => (
-    <option value={category} key={category}>
-      {category}
-    </option>
-  ))
   return (
     <div className="add-book-form">
       <h3 className="form-title">AddBook</h3>
@@ -29,25 +26,21 @@ const AddBook = () => {
           type="text"
           id="title-input"
           placeholder="Book title"
-          value={state.title}
-          onChange={handleChange}
+          name="title"
+          onChange={(e) => setTitle(e.target.value)}
           className="border border-slate-200"
         />
-        <select
-          name="book-categories"
-          value={state.bookCategory}
-          onChange={handleChange}
-          className="border border-slate-200 ml-5"
-        >
-          <option value={""} disabled>
-            Category
-          </option>
-          {categoryOptions}
-        </select>
 
-        <button type="submit" className="bg-turquoise text-white">
-          ADD BOOK
-        </button>
+        <input
+          type="text"
+          id="author-input"
+          placeholder="Author"
+          name="author"
+          onChange={(e) => setAuthor(e.target.value)}
+          className="border border-slate-200"
+        />
+
+        <Button text="ADD BOOK" onClick={submitForm} classname="bg-turquoise text-white px-3" />
       </form>
     </div>
   );
