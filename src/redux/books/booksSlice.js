@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios'
+import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
   books: [],
@@ -18,12 +19,15 @@ export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
 })
 
 export const addNewBook = createAsyncThunk('books/addNewBook', async (obj) => {
+
+  const newBook = { ...obj, item_id: uuidv4() }
+
   try {
-    const res = await axios.post(url, obj)
+    const res = await axios.post(url, newBook)
     console.log(res.data)
 
   } catch (error) {
-    console.log(error)
+    throw new Error('Failed to add book.');
   }
 
 })
