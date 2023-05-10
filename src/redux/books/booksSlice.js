@@ -1,40 +1,75 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios'
 
 const initialState = {
-  books: [
-    {
-      "item_id": "item1",
-      "title": "The Great Gatsby",
-      "author": "John Smith",
-      "category": "Fiction"
-    },
-    {
-      "item_id": "item2",
-      "title": "Anna Karenina",
-      "author": "Leo Tolstoy",
-      "category": "Fiction"
-    },
-    {
-      "item_id": "item3",
-      "title": "The Selfish Gene",
-      "author": "Richard Dawkins",
-      "category": "Nonfiction"
-    }
-]
+  books: [],
+  isLoading: false,
 }
+
+const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/KJOKBZ7x4p98Ki10OPZI/books'
+
+export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
+  try {
+    const response = await axios(url)
+    return await response.data
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+export const addNewBook = createAsyncThunk('books/addNewBook', async (obj) => {
+  try {
+    const res = await axios.post(url, obj)
+    console.log(res.data)
+
+  } catch (error) {
+    console.log(error)
+  }
+
+})
 
 export const BooksSlice = createSlice({
   name: 'books',
   initialState,
-  reducers: {
-    addBook: (state, action) => {
-      state.books.push(action.payload);
-    },
+  // reducers: {
+  //   addBook: (state, action) => {
+  //     state.books.push(action.payload);
+  //   },
 
-    removeBook: (state, action) => {
-      const bookId = action.payload
-      state.books = state.books.filter((book) => book.item_id !== bookId)
-    },
+  //   removeBook: (state, action) => {
+  //     const bookId = action.payload
+  //     state.books = state.books.filter((book) => book.item_id !== bookId)
+  //   },
+  // },
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchBooks.pending, (state) => {
+        state.isLoading = true
+      })
+
+      .addCase(fetchBooks.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.books = action.payload
+      })
+
+      .addCase(fetchBooks.rejected, (state) => {
+        state.isLoading = false
+      })
+
+      .addCase(addNewBook.pending, (state) => {
+        state.isLoading = true
+      })
+
+      .addCase(addNewBook.fulfilled, (state, action) => {
+        console.log({ action })
+        state.isLoading = false
+        state.books = action.payload;
+      })
+
+      .addCase(addNewBook.rejected, (state) => {
+        state.isLoading = false
+      })
   }
 
 })
