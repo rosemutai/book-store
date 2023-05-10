@@ -7,45 +7,46 @@ const initialState = {
   isLoading: false,
 }
 
-const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/KJOKBZ7x4p98Ki10OPZI/books'
+const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/M7CSX9j8jMgRuO6kDbwV/books'
 
 export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
   try {
     const response = await axios(url)
-    return await response.data
+    const result = response.data
+    const dataArray = Object.keys(result).map((key) => ({
+      item_id: key,
+      ...result[key][0]
+    }))
+
+    return dataArray
+
   } catch (error) {
-    console.log(error)
+    throw new Error('Failed to fetch books.');
   }
 })
 
 export const addNewBook = createAsyncThunk('books/addNewBook', async (obj) => {
-
   const newBook = { ...obj, item_id: uuidv4() }
-
   try {
     const res = await axios.post(url, newBook)
-    console.log(res.data)
-
+    return res.data
   } catch (error) {
     throw new Error('Failed to add book.');
   }
+})
 
+export const removeABook = createAsyncThunk('books/deleteBook', async (id) => {
+  try {
+    await axios.delete(`https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/M7CSX9j8jMgRuO6kDbwV/books/${id}`)
+    return "Book deleted Successfully" 
+  } catch (error) {
+    throw new Error('Failed to delete book.');
+  }
 })
 
 export const BooksSlice = createSlice({
   name: 'books',
   initialState,
-  // reducers: {
-  //   addBook: (state, action) => {
-  //     state.books.push(action.payload);
-  //   },
-
-  //   removeBook: (state, action) => {
-  //     const bookId = action.payload
-  //     state.books = state.books.filter((book) => book.item_id !== bookId)
-  //   },
-  // },
-
   extraReducers: (builder) => {
     builder
       .addCase(fetchBooks.pending, (state) => {
@@ -53,7 +54,6 @@ export const BooksSlice = createSlice({
       })
 
       .addCase(fetchBooks.fulfilled, (state, action) => {
-        state.isLoading = false
         state.books = action.payload
       })
 
@@ -65,13 +65,19 @@ export const BooksSlice = createSlice({
         state.isLoading = true
       })
 
-      .addCase(addNewBook.fulfilled, (state, action) => {
-        console.log({ action })
-        state.isLoading = false
-        state.books = action.payload;
-      })
+      .addCase(addNewBook.fulfilled, (state, action) => action.payload)
 
       .addCase(addNewBook.rejected, (state) => {
+        state.isLoading = false
+      })
+
+      .addCase(removeABook.pending, (state) => {
+        state.isLoading = false
+      })
+
+      .addCase(removeABook.fulfilled, (state, action) => action.payload )
+
+      .addCase(removeABook.rejected, (state) => {
         state.isLoading = false
       })
   }
