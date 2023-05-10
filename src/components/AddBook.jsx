@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { addNewBook, fetchBooks } from '../redux/books/booksSlice';
+import { addNewBook } from '../redux/books/booksSlice';
 import Button from './Button';
 
 const AddBook = () => {
@@ -13,7 +13,6 @@ const AddBook = () => {
     e.preventDefault();
 
     dispatch(addNewBook({ title, author, category: "" }));
-    dispatch(fetchBooks())
   }
 
   return (

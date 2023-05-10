@@ -25,20 +25,24 @@ export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
   }
 })
 
-export const addNewBook = createAsyncThunk('books/addNewBook', async (obj) => {
+export const addNewBook = createAsyncThunk('books/addNewBook', async (obj, thunkAPI) => {
   const newBook = { ...obj, item_id: uuidv4() }
   try {
-    const res = await axios.post(url, newBook)
-    return res.data
+    await axios.post(url, newBook)
+    thunkAPI.dispatch(fetchBooks())
+    const res =  thunkAPI.getState().books
+    return res
   } catch (error) {
     throw new Error('Failed to add book.');
   }
 })
 
-export const removeABook = createAsyncThunk('books/deleteBook', async (id) => {
+export const removeABook = createAsyncThunk('books/deleteBook', async (id, thunkAPI) => {
   try {
     await axios.delete(`https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/M7CSX9j8jMgRuO6kDbwV/books/${id}`)
-    return "Book deleted Successfully" 
+    thunkAPI.dispatch(fetchBooks())
+    const res = thunkAPI.getState().books
+    return res 
   } catch (error) {
     throw new Error('Failed to delete book.');
   }
