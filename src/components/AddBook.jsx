@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
-// import { addBook } from "../redux/books/booksSlice";
-import { addNewBook } from '../redux/books/booksSlice';
+import { addNewBook, fetchBooks } from '../redux/books/booksSlice';
 import Button from './Button';
 
 const AddBook = () => {
@@ -9,16 +8,12 @@ const AddBook = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  // const books = useSelector((state) => state.books.books)
 
   const submitForm = (e) => {
     e.preventDefault();
 
-    // const id = books && Array.from(books).length + 1;
     dispatch(addNewBook({ title, author, category: "" }));
-
-
-    // dispatch(addNewBook({ item_id: `item${id}`, title, author, "category": "" }));
+    dispatch(fetchBooks())
   }
 
   return (
