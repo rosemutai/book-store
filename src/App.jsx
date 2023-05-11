@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar";
 function App() {
 
   return (
-    <div className="w-full bg-slate-100 h-screen py-16">
+    <div className="w-full bg-slate-100 min-h-screen py-16">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />}></Route>
