@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { addBook } from "../redux/books/booksSlice";
+import { useDispatch } from "react-redux";
+import { addNewBook } from '../redux/books/booksSlice';
 import Button from './Button';
 
 const AddBook = () => {
@@ -8,14 +8,11 @@ const AddBook = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const books = useSelector((state) => state.books.books)
 
   const submitForm = (e) => {
     e.preventDefault();
 
-    const id = books.length + 1
-
-    dispatch(addBook({ item_id: `item${id}`, title, author }));
+    dispatch(addNewBook({ title, author, category: "" }));
   }
 
   return (

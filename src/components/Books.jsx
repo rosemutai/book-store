@@ -1,31 +1,35 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddBook from "./AddBook";
-import Book from "./Book"
-import { removeBook } from "../redux/books/booksSlice";
+import Book from "./Book";
+import { removeABook, fetchBooks } from "../redux/books/booksSlice";
 
 const Books = () => {
+  const books = useSelector((state) => state.books.books);
+  const dispatch = useDispatch()
 
-  const books = useSelector((state) => state.books.books)
-  let dispatch = useDispatch();
+  const deleteBook = (e) => {
+    dispatch(removeABook(e.target.id))
+  }
 
-    const deleteBook = (e) => {
-      dispatch(removeBook(e.target.id));
-    };
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, []);
 
   return (
-    <div className="">
+    <div className="h">
       <div className="books-list">
-        {books.map((book) => {
+        {books && Array.from(books).map((item) => {
           return (
             <Book
-              key={book.item_id}
-              item_id={book.item_id}
-              category={book.category}
-              title={book.title}
-              author={book.author}
-              onClick={deleteBook}
-            />
-          );
+                key={item.item_id}
+                item_id={item.item_id}
+                title={item.title}
+                author={item.author}
+                onClick={deleteBook}
+              />
+          )
         })}
       </div>
 
@@ -34,6 +38,6 @@ const Books = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Books
+export default Books;

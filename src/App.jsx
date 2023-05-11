@@ -1,9 +1,10 @@
-import { Routes, Route } from 'react-router-dom';
-import Home from './routes/Home';
-import Categories from './routes/Categories';
-import Navbar from './components/Navbar';
+import { Routes, Route } from "react-router-dom";
+import Home from "./routes/Home";
+import Categories from "./routes/Categories";
+import Navbar from "./components/Navbar";
 
 function App() {
+
   return (
     <div className="w-full bg-slate-100 h-screen py-16">
       <Navbar />
@@ -15,4 +16,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
