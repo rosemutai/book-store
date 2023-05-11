@@ -4,7 +4,7 @@ import Button from "./Button";
 const Book = ({ item_id, title, author, onClick }) => {
 
   return (
-    <div className="book">
+    <div className="book bg-red-500 my-3 py-4">
       <h2>{title}</h2>
       <p>{author}</p>
 
