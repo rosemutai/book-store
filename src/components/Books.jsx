@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import AddBook from "./AddBook";
 import Book from "./Book";
 import { removeABook, fetchBooks } from "../redux/books/booksSlice";
 
@@ -33,9 +32,7 @@ const Books = () => {
         })}
       </div>
 
-      <div className="form-section">
-        <AddBook />
-      </div>
+      
     </div>
   );
 };
