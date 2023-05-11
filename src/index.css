@@ -11,3 +11,16 @@
 .active {
   color: #000;
 }
+
+.progress-circle {
+  visibility: hidden;
+  height: 0;
+  width: 0;
+}
+
+.progress-bar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-image: radial-gradient(closest-side, white 79%, transparent 80% 100%), conic-gradient(at 50% 50%, #419bf9 64%, rgb(235, 234, 234) 0);
+}
