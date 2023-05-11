@@ -6,30 +6,30 @@ const Book = ({ item_id, title, author, onClick }) => {
   return (
     <div className="book bg-white my-3 p-4 border border-slate-200 rounded-sm flex justify-between">
       <div className="left-section">
-        <h5 className="text-gray-400/30 font-bold">Action</h5>
+        <h5 className="text-gray-400/80 font-bold">Action</h5>
         <h2 className=" text-black text-lg font-bold">{title}</h2>
-        <p className="text-turquoise font-medium">{author}</p>
+        <p className="text-turquoise/60 font-regular">{author}</p>
 
-        <div className="btns flex">
+        <div className="btns flex mt-2">
           <Button
             text="Comments"
             id={item_id}
             onClick={onClick}
-            classname=" text-turquoise border-0 pr-3"
+            classname=" text-turquoise/60 border-0 pr-3"
           />
 
           <Button
             text="Remove"
             id={item_id}
             onClick={onClick}
-            classname="text-turquoise border-y-0 border-x-2 border-x-slate-300/60 px-2"
+            classname="text-turquoise/60 border-y-0 border-x-2 border-x-slate-300/60 px-2"
           />
 
           <Button
             text="Edit"
             id={item_id}
             onClick={onClick}
-            classname="text-turquoise border-0 px-3"
+            classname="text-turquoise/60 border-0 px-3"
           />
         </div>
       </div>
@@ -43,10 +43,10 @@ const Book = ({ item_id, title, author, onClick }) => {
           </div>
 
           <div className="book-progress pl-6">
-            <h4 className="percentage text-2xl font-normal tracking-wide">
+            <h4 className="percentage text-2xl font-normal tracking-wide text-black/80">
               64%
             </h4>
-            <p className="completed-status text-gray-400/70 ">completed</p>
+            <p className="completed-status text-gray-400/70 font-normal">Completed</p>
           </div>
         </div>
 
@@ -56,10 +56,10 @@ const Book = ({ item_id, title, author, onClick }) => {
           </h5>
           <p className="chapter-value text-black/80">Chapter 17</p>
           <Button
-            text="Update Progress"
+            text="UPDATE PROGRESS"
             id={item_id}
             onClick={onClick}
-            classname=" text-white bg-turquoise border-0 text-center rounded-sm py-1 my-4 px-3"
+            classname=" text-white bg-turquoise border-0 text-center rounded-sm text-xs py-1 my-4 px-3"
           />
         </div>
       </div>
