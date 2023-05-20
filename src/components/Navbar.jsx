@@ -20,17 +20,14 @@ const Navbar = () => {
           <button
             type="button"
             onClick={() => setIsShowing((isShowing) => !isShowing)}
-            className="cursor-pointer ml-40"
+            className="cursor-pointer ml-[11.7rem] md:hidden block"
           >
             {isShowing ? (
-              <FontAwesomeIcon
-                icon={faTimes}
-                className="text-turquoise md:hidden block"
-              />
+              <FontAwesomeIcon icon={faTimes} className="text-turquoise" />
             ) : (
               <FontAwesomeIcon
                 icon={faBars}
-                className="text-turquoise md:hidden block"
+                className="text-turquoise"
               />
             )}
           </button>
@@ -48,7 +45,7 @@ const Navbar = () => {
 
           <FontAwesomeIcon
             icon={faUser}
-            className="text-turquoise border border-slate-200 p-4 rounded-full ml-96"
+            className="text-turquoise border border-slate-200 p-4 rounded-full ml-80"
           />
         </div>
 
@@ -65,7 +62,10 @@ const Navbar = () => {
             className="other-navlinks md:hidden flex flex-col gap-12 absolute z-30
             top-36 left-4 bg-turquoise w-11/12 mx-auto h-screen pl-3"
           >
-            <NavLink to="/" className="uppercase tracking-wider text-white pt-8">
+            <NavLink
+              to="/"
+              className="uppercase tracking-wider text-white pt-8"
+            >
               BOOKS
             </NavLink>
             <NavLink
